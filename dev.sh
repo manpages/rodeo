@@ -1,0 +1,1 @@
+erl -pa ebin ../core/saloon/ebin ../deps/*/ebin -name saloon@127.0.0.1 -boot start_sasl -run make all load -s saloon_app

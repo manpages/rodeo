@@ -1,0 +1,19 @@
+{application, saloon,
+	[
+		{description, "Saloon for cowboys"},
+		{vsn, "0.1.0"},
+		{registered, []},
+		{applications, [
+							kernel,
+							inets,
+							stdlib,
+							crypto,
+							public_key,
+							ssl,
+							fission,
+							cowboy
+						]},
+		{mod, {saloon_app, []}},
+		{env, []}
+	]
+}.

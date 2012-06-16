@@ -1,4 +1,4 @@
--module(fril_user).
+-module(saloon_user).
 
 -behaviour(cowboy_http_handler).
 
@@ -8,7 +8,7 @@
 
 init({_Any, http}, Req, [Type]) ->
 	saloon_init:prepare(Req),
-	io:format("Initializing fril_user with ~p~n", [Type]),
+	io:format("Initializing saloon_user with ~p~n", [Type]),
 	{ok, Req, undefined}.
 
 handle(Req, State) ->
@@ -19,8 +19,6 @@ handle(Req, State) ->
 				200, [], mustache:render(fril_register_view, "view/index.mustache"), Req
 			);
 		{'POST', _} ->
-			io:format("Body Querystring:~n~p~n", [cowboy_http_req:body_qs(Req)]),
-
 			case validate_registration(Req) of
 				{ok, {Profile, EncPassword}} -> 
 					saloon_ctx:fill(),
@@ -73,9 +71,7 @@ validate_registration(Req) ->
 						firstname=saloon_util:pk(<<"first_name">>, Req),
 						lastname=saloon_util:pk(<<"last_name">>, Req),
 						email=saloon_util:pk(<<"email">>, Req),
-						roles=[user] ++ [
-							binary_to_atom(Y, utf8) || {X, Y} <- BodyQs, (X == <<"is_employer">> orelse X == <<"is_freelancer">>)
-						]
+						roles=[user]
 					}, saloon_util:md5(saloon_util:pk(<<"password">>, Req))
 				}};
 		Error -> {error, Error}

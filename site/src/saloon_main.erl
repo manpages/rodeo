@@ -13,8 +13,16 @@ init({_Any, http}, Req, []) ->
 handle(Req, State) ->
 	?debugMsg("handle"),
 	saloon_init:prepare(Req),
+	?debugMsg("SOMETHING NEW!"),
+	?debugFmt("erlydtl:compile: ~p~n", [erlydtl:compile("./site/templates/index_2.dtl", index_dtl, [{out_dir, "./site/ebin/"}])]),
+	{ok, Rendered} = index_dtl:render([
+		{name, <<"Forever Alone Guy">>},
+		{friends, []},
+		{primes, ["2", <<"3">>, 5, 7]}
+	]),
+	?debugFmt("=RENDERING===~n~p~n", [Rendered]),
 	{ok, Rep} = cowboy_http_req:reply(
-		200, [], mustache:render(saloon_main_view, "view/index.mustache"), Req
+		200, [], Rendered, Req
 	),
 	%{ok , Rep} = cowboy_http_req:reply(200, [], "ok", Req),
 	{ok, Rep, State+1}.

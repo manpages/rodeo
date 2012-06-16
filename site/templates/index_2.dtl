@@ -1,0 +1,9 @@
+   Welcome back, {{ name }}!
+
+   You have {{ friends|length }} friends: {{ friends|join:", " }}
+
+   Have some primes:
+   {# this is exciting #}
+   {% for i in primes %}
+      {{ i }}
+   {% endfor %}

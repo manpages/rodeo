@@ -1,2 +1,2 @@
 #TODO: check for the .hrl update times!
-rm -v ./ebin/*beam
+ls -ll |grep -v '\(_dtl.beam\)\|\(app\)' |xargs rm -v

@@ -14,7 +14,6 @@ prepare(Req) ->
 	?debugFmt("~n~n~n~n=~p REQUEST===~nPath: ~p~nPeer: ~p~nBody query string data:~p~n", [X || {X, _} <- [cowboy_http_req:method(Req), cowboy_http_req:raw_path(Req), cowboy_http_req:peer(Req), cowboy_http_req:body_qs(Req)]]),
 	case ?DEV_MODE of
 		true -> 
-			os:cmd("sh ./f5.sh"),
 			case make:all([load]) of
 				up_to_date ->
 					ok;

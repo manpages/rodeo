@@ -3,7 +3,7 @@
               {vsn,"0.1.0"},
               {registered,[]},
               {applications,[kernel,inets,stdlib,crypto,public_key,ssl,
-                             fission,cowboy]},
+                             fission,cowboy,gettext]},
               {mod,{saloon_app,[]}},
               {env,[]},
               {modules,[saloon_app,saloon_auth,saloon_ctx,saloon_init,

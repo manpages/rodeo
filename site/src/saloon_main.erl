@@ -14,7 +14,7 @@ handle(Req, State) ->
 	?debugMsg("handle"),
 	saloon_init:prepare(Req),
 	?debugMsg("SOMETHING NEW!"),
-	?debugFmt("erlydtl:compile: ~p~n", [erlydtl:compile("./site/templates/index_2.dtl", index_dtl, [{out_dir, "./site/ebin/"}])]),
+	?debugFmt("erlydtl:compile: ~p~n", [erlydtl:compile("./site/templates/index_2.dtl", index_dtl, [{out_dir, "./site/ebin/"}, {custom_tags_modules, [saloon_lang]}])]),
 	{ok, Rendered} = index_dtl:render([
 		{name, <<"Forever Alone Guy">>},
 		{friends, []},

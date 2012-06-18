@@ -23,7 +23,6 @@ start() ->
 	application:start(public_key),
 	application:start(ssl),
 	application:start(fission),
-	application:start(gettext),
 	application:start(cowboy),
 	cowboy:start_listener(saloon_listener, 200,
 		cowboy_tcp_transport, [{port, 53333}],

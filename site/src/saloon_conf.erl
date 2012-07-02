@@ -1,3 +1,12 @@
+-module(saloon_conf).
+
+-export([
+		dispatch/0,
+		port/0,
+		languages/0
+	]).
+
+
 dispatch() ->
 	[
 		{'_', [
@@ -28,3 +37,7 @@ dispatch() ->
 				{'_', saloon_main, []}
 			]}
 	].
+
+languages() -> [en, ru, lv, es].
+
+port() -> 50005.

@@ -14,7 +14,7 @@
 t([{Tag,X}]) -> 
 	Fname = ?SRCPATH ++ saloon_util:to_list(?MODULE) ++ ".erl",
 	{_, Myself} = file:read_file(Fname),
-	NewFunText = io_lib:format("&~n~nt([{~w,<<\"~ts\">>}]) -> ~n	case saloon_ctx:language() of ~n", [Tag,X]),
+	NewFunText = io_lib:format("%%spawnpoint~n~nt([{~w,<<\"~ts\">>}]) -> ~n	case saloon_ctx:language() of ~n", [Tag,X]),
 	NewFunText2= lists:foldl(fun (L, Acc) -> Acc ++ io_lib:format("		~ts -> <<\"~ts\">>;~n", [L, X]) end, "", languages()),
 	NewFunText3= io_lib:format("		_ -> <<\"*~ts*\">>~n	end;", [X]),
 	NewerSelf = re:replace(

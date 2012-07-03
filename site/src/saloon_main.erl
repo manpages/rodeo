@@ -13,12 +13,29 @@ init({_Any, http}, Req, []) ->
 handle(Req, State) ->
 	?debugMsg("handle"),
 	saloon_init:prepare(Req),
-	?debugMsg("SOMETHING NEW!"),
-	?debugFmt("erlydtl:compile: ~p~n", [erlydtl:compile("./site/templates/index_2.dtl", index_dtl, [{out_dir, "./site/ebin/"}, {custom_tags_modules, [saloon_lang]}])]),
-	{ok, Rendered} = index_dtl:render([
-		{name, <<"Forever Alone Guy">>},
-		{friends, []},
-		{primes, ["2", <<"3">>, 5, 7]}
+	?debugFmt(
+		"erlydtl:compile: ~p~n", 
+		[
+			erlydtl:compile(
+				"site/templates/base_landing.dtl", 
+				main_dtl, 
+				[{out_dir, "site/ebin/"}, {custom_tags_modules, [saloon_lang]}]
+			)
+		]
+	),
+	{ok, Rendered} = main_dtl:render([
+		%{name, <<"Forever Alone Guy">>},
+		%{friends, []},
+		%{primes, ["2", <<"3">>, 5, 7]}
+		{me, [
+				{category, <<"">>},
+				{controller, <<"saloon_main">>}
+			]},
+		{categories, []},
+		{scripts, []}, 
+		{stylesheets, [
+			[{name, <<"landing">>}]
+		]}
 	]),
 	?debugFmt("=RENDERING===~n~p~n", [Rendered]),
 	{ok, Rep} = cowboy_http_req:reply(

@@ -24,6 +24,9 @@
 	log/1
 ]).
 
+prop(Key, List) ->
+	proplists:get_value(Key, List).
+
 pk(Key, Req) -> %% Get value for post key
 	proplists:get_value(Key, element(1, cowboy_http_req:body_qs(Req)), undefined).
 ck(Key, Req) -> %% Get value for cookie key
